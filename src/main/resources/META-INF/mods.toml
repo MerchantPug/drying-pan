@@ -27,14 +27,14 @@ displayName="Drying Pan" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="dryingpan.png" #optional
+# logoFile="dryingpan.png" #optional
 # A text field displayed in the mod UI
 credits="Brock" #optional
 # A text field displayed in the mod UI
 authors="MerchantPug" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Hey I know! I'll use my trusty frying pan... as a drying pan.
+Hey I know! I'll use my trusty frying pan as a drying pan.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.dryingpan]] #optional
