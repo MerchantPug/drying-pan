@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.merchantpug.dryingpan.mixin",
+  "plugin": "com.github.merchantpug.dryingpan.DryingPanMixinPlugin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerEntityMixin"
+  ],
+  "client": [
+    "client.ClientPlayerEntityMixin",
+    "client.DripParticleFallingLiquidParticleMixin",
+    "client.PlayerModelMixin",
+    "client.RainParticleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "dryingpan.refmap.json"
+}
