@@ -4,6 +4,7 @@ import com.github.merchantpug.dryingpan.access.PlayerFryingPanAccess;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Set;
@@ -49,8 +51,27 @@ public class FryingPanItem extends Item {
         return ActionResult.consume(itemStack);
     }
 
+    @Override
     public int getUseDuration(ItemStack stack) {
         return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, (entity) -> {
+            entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
+        });
+        return true;
+    }
+
+    @Override
+    public boolean mineBlock(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entity) {
+        if (state.getDestroySpeed(world, pos) != 0.0F) {
+            stack.hurtAndBreak(2, entity, (entity1) -> {
+                entity1.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
+            });
+        }
+        return true;
     }
 
     @Override
