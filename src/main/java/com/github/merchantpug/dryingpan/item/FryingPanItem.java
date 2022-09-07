@@ -63,4 +63,15 @@ public class FryingPanItem extends Item {
         Set<Enchantment> enchantments = ImmutableSet.of(Enchantments.SHARPNESS, Enchantments.MOB_LOOTING, Enchantments.FIRE_ASPECT, Enchantments.KNOCKBACK, Enchantments.UNBREAKING, Enchantments.MENDING, Enchantments.VANISHING_CURSE);
         return enchantments.containsAll(EnchantmentHelper.getEnchantments(book).keySet());
     }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        Set<Enchantment> enchantments = ImmutableSet.of(Enchantments.SHARPNESS, Enchantments.MOB_LOOTING, Enchantments.FIRE_ASPECT, Enchantments.KNOCKBACK, Enchantments.UNBREAKING, Enchantments.MENDING, Enchantments.VANISHING_CURSE);
+        return enchantments.contains(enchantment);
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return 14;
+    }
 }
