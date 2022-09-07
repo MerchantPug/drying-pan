@@ -20,9 +20,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.0'
-group = 'com.github.merchantpug' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'dryingpan'
+version = project.mod_version
+group = project.maven_group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = project.archives_base_name
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
