@@ -63,7 +63,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerFr
             ((ServerWorld)this.level).sendParticles(ParticleTypes.RAIN, (this.getRandom().nextFloat() * (box.maxX - box.minX) + box.minX), box.max(Direction.Axis.Y), (this.getRandom().nextFloat() * (box.maxZ - box.minZ) + box.minZ), 1, 0.0D, 0.0D, 0.0D, 1.0D);
         }
         if (this.dryingpan$usingFryingPan) {
-            List<FallingBlockEntity> fallingBlockEntityList = this.level.getEntities(EntityType.FALLING_BLOCK, this.getBoundingBox().inflate(0.0F, this.getBoundingBox().getYsize() * 0.15F, 0.0F), p -> true);
+            AxisAlignedBB bb = this.getBoundingBox().inflate(0.0F, this.getBoundingBox().getYsize() * 0.15F, 0.0F);
+            List<FallingBlockEntity> fallingBlockEntityList = this.level.getEntities(EntityType.FALLING_BLOCK, new AxisAlignedBB(bb.minX, bb.max(Direction.Axis.Y), bb.minZ, bb.maxX, bb.max(Direction.Axis.Y), bb.maxZ), p -> true);
             fallingBlockEntityList.forEach(fallingBlockEntity -> {
                 if (fallingBlockEntity.dropItem && this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                     fallingBlockEntity.spawnAtLocation(fallingBlockEntity.getBlockState().getBlock());
