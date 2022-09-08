@@ -26,7 +26,7 @@ public class PlayerModelMixin<T extends LivingEntity> extends BipedModel<T> {
 
     @Inject(method = "setupAnim(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "TAIL"))
     private void dryingpan$setupDryingPanAnim(T player, float f, float g, float h, float i, float j, CallbackInfo ci) {
-        if (this instanceof PlayerFryingPanAccess && ((PlayerFryingPanAccess)player).dryingpan$getUsingFryingPan()) {
+        if (player instanceof PlayerFryingPanAccess && ((PlayerFryingPanAccess)player).dryingpan$getUsingFryingPan()) {
             if (((PlayerFryingPanAccess)(Object)player).dryingpan$getUsingFryingPanHand() == Hand.MAIN_HAND && player.getMainArm() == HandSide.RIGHT || ((PlayerFryingPanAccess)(Object)player).dryingpan$getUsingFryingPanHand() == Hand.OFF_HAND && player.getMainArm() == HandSide.LEFT) {
                 this.rightArm.xRot = (float) (190.0F * Math.PI / 180.0F);
                 this.rightArm.yRot = (float) (90.0F * Math.PI / 180.0F);
