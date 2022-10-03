@@ -1,5 +1,6 @@
 package com.github.merchantpug.dryingpan;
 
+import com.github.merchantpug.dryingpan.network.DryingPanNetwork;
 import com.github.merchantpug.dryingpan.registry.DryingPanItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +17,7 @@ public class DryingPan
 
     public DryingPan() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent event) -> {
+            DryingPanNetwork.register();
         });
 
         // Register ourselves for server and other game events we are interested in

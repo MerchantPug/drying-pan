@@ -1,6 +1,8 @@
 package com.github.merchantpug.dryingpan.item;
 
 import com.github.merchantpug.dryingpan.access.PlayerFryingPanAccess;
+import com.github.merchantpug.dryingpan.network.DryingPanNetwork;
+import com.github.merchantpug.dryingpan.network.message.UseFryingPanPacket;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
@@ -11,14 +13,17 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.Set;
 import java.util.UUID;
@@ -48,6 +53,9 @@ public class FryingPanItem extends Item {
 
         player.startUsingItem(hand);
         ((PlayerFryingPanAccess)player).dryingpan$setUsingFryingPan(true, itemStack, hand);
+        if (!player.level.isClientSide) {
+            DryingPanNetwork.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> player),  new UseFryingPanPacket(player.getId(), hand, true));
+        }
         return ActionResult.consume(itemStack);
     }
 
